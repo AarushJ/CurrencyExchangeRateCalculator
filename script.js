@@ -27,6 +27,26 @@ function calculate(){
   });
 }
 
+function calculate2(){
+  const currencyOneCode = currencyOneElem.value;
+  const currencyTwoCode = currencyTwoElem.value;
+
+  fetchPerUSDRate().then(data => {
+    const currencyOnePerUSD = data.rates[currencyOneCode];
+    const currencyTwoPerUSD = data.rates[currencyTwoCode];
+
+    // 1$ = currencyOnePerUSD currencyOneCode
+    // 1$ = currencyTwoPerUSD currencyTwoCode
+    // currencyTwoPerUSD currencyTwoCode = currencyOnePerUSD currencyOneCode
+    // 1 currencyOneCode = (currencyTwoPerUSD/currencyOnePerUSD) currencyTwoCode
+    const rate = (currencyTwoPerUSD/currencyOnePerUSD).toFixed(3);
+    rateElement.innerText = `1 ${currencyOneCode} = ${rate} ${currencyTwoCode}`;
+    amountOne.value = (amountTwo.value*rate).toFixed(3);
+  });
+}
+
+
+
 async function fetchPerUSDRate(){
   // this api endpoints gives rate of all currencies wrt USD
   const response = await fetch(`https://api.exchangerate-api.com/v6/latest`);
@@ -37,7 +57,7 @@ async function fetchPerUSDRate(){
 currencyOneElem.addEventListener('change', calculate);
 currencyTwoElem.addEventListener('change', calculate);
 amountOne.addEventListener('input', calculate);
-amountTwo.addEventListener('input', calculate);
+amountTwo.addEventListener('input', calculate2);
 
 swapButton.addEventListener('click', () => {
   const temp = currencyOneElem.value;
