@@ -21,9 +21,9 @@ function calculate(){
     // 1$ = currencyTwoPerUSD currencyTwoCode
     // currencyTwoPerUSD currencyTwoCode = currencyOnePerUSD currencyOneCode
     // 1 currencyOneCode = (currencyTwoPerUSD/currencyOnePerUSD) currencyTwoCode
-    const rate = (currencyTwoPerUSD/currencyOnePerUSD).toFixed(3);
+    const rate = parseFloat((currencyTwoPerUSD/currencyOnePerUSD).toFixed(3));
     rateElement.innerText = `1 ${currencyOneCode} = ${rate} ${currencyTwoCode}`;
-    amountTwo.value = (amountOne.value*rate).toFixed(3);
+    amountTwo.value = parseFloat((amountOne.value*rate).toFixed(3));
   });
 }
 
@@ -39,9 +39,9 @@ function calculate2(){
     // 1$ = currencyTwoPerUSD currencyTwoCode
     // currencyTwoPerUSD currencyTwoCode = currencyOnePerUSD currencyOneCode
     // 1 currencyOneCode = (currencyTwoPerUSD/currencyOnePerUSD) currencyTwoCode
-    const rate = (currencyTwoPerUSD/currencyOnePerUSD).toFixed(3);
+    const rate = parseFloat((currencyTwoPerUSD/currencyOnePerUSD).toFixed(3));
     rateElement.innerText = `1 ${currencyOneCode} = ${rate} ${currencyTwoCode}`;
-    amountOne.value = (amountTwo.value*rate).toFixed(3);
+    amountOne.value = parseFloat((amountTwo.value*rate).toFixed(3));
   });
 }
 
